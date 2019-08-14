@@ -40,6 +40,9 @@
 </head>
 
 <body>
+    <?php 
+        session_start();
+    ?>
     <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
 
@@ -48,7 +51,7 @@
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-reveal">
         <div class="content-block">
-            <p>Left panel content goes here</p>
+            <!--p>Left panel content goes here</p-->
 
             <div class="collection">
                 <a href="#!" class="collection-item">Opcion #1</a>
@@ -94,8 +97,20 @@
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
-                            <div class="row">
-                                <form class="" method="POST" onsubmit="return validarFormulario()"> 
+                            <div class="row">               <!--http://localhost//pruebaphone/ProjM/www/form.php LOCAL -->
+                                <form class="captura" method="POST" action="http://glz.iti16.com/ProjM/form.php"> 
+                                    <div class="datos">
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                              <input placeholder="Escribe tus nombres" id="nombre" name="nombre" type="text" class="validate">
+                                              <label for="nombre">Nombre(s)</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                              <input placeholder="Escribe tus apellidos" id="apellidos" name="apellidos" type="text" class="validate">
+                                              <label for="apellidos">Apellidos</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="preg">
                                         <p>
                                         <h5> 1.- ¿Que personaje aparecera en el billete de 50 libras inglesas?<label for="pre1" class="ic"></label></h5>
@@ -200,15 +215,29 @@
                                         </p>
                                     </div>
 
-                                    <div id="enviar">
-                                        <button class="btn waves-effect waves-light" type="submit" name="action">
-                                        Submit
+                                    <input type="number" name="puntaje" id="puntaje" style="display:none ;">
+
+                                    <div class="enviar">
+                                        <button class="btn waves-effect waves-light" type="button"  onclick="return validarFormulario() , enviar.disabled = false;">
+                                            Verificar
                                         </button>
+                                        <button disabled class="btn waves-effect waves-light" type="submit" name="enviar" id="enviar" onclick="reload.disabled = false;">
+                                            Enviar
+                                        </button>
+                                        <button disabled="" class="btn waves-effect waves-light" value="Refresh Page" onclick="window.location.reload();" name="reload" id="reload">
+                                            Refresh
+                                        </button>
+                                    </div> 
+
+                                    <div class="enviar">
+                                        
+                                    </div>
+                                    <div>
+                                                
                                     </div>           
                                 </form>
+                                
                             </div>
-                            <!-- Link to another page -->
-                            <a href="about.html">About app</a>
                         </div>
                     </div>
                 </div>
@@ -225,30 +254,39 @@
     </div>
 
     <script type="text/javascript">
-        function validarFormulario(){
-            var preg1 = document.getElementsByName('qu1');
-
-            var banderaRBTN = false;
-
-            for(var i = 0; i < preg1.length; i++){
-              if(preg1[i].checked){
-                banderaRBTN = true;
-                break;
-              }
-            }
-            if(!banderaRBTN){
-              alert('ERROR: Debe elegir una opción de radio button');
-              return false;
-            }
-            return false;
-        }
+        $( document ).ready(function(){
+            var puntos = aciertos;
+            //AJAX
+            $("#puntaje").load("index.html",{
+                puntos;
+            });
+        });
     </script>
+    <style type="text/css">
+        .enviar{
+            padding: 5px;
+            margin-left: 35%;
+            margin-right: 35%;
+        }
+        @media screen and (max-width: 500px){
+            .enviar{
+                margin-left: 6%;
+                margin-right: 5%;
+                padding: 10px;
+                display: inline;
+            }
+        }
+    </style>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/Validar.js"></script>
+    <script type="text/javascript" src="phonegap.js"></script>
+    <?php 
+        //require("../../form.php");
+    ?>
 </body>
 <footer>
     
