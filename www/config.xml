@@ -2,7 +2,7 @@
 <widget xmlns = "http://phonegap.com/ns/1.0"
 	id = "com.phonegap.example"
 	versionCode = "10"
-	version = "1.0.0" >
+	version = "1.6.0" >
 
 	<!--VersionCode is optional and Android only-->
 
